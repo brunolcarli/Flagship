@@ -7,7 +7,16 @@ queries = (
     bot.Query,
 )
 
+mutations = (
+    graphene.ObjectType,
+    bot.Mutation,
+)
+
 class Query(*queries):
     pass
 
-schema = graphene.Schema(query=Query)
+
+class Mutation(*mutations):
+    pass
+
+schema = graphene.Schema(query=Query, mutation=Mutation)

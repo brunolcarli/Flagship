@@ -51,14 +51,23 @@ class Trainer(models.Model):
     '''
     Define a estrutura de um Treinador (participante da liga).
     '''
-    name = models.CharField(max_length=150, blank=False, null=False)
-    nickname = models.CharField(max_length=150, blank=False, null=False)
+    name = models.CharField(
+        max_length=150,
+        blank=False,
+        null=False,
+        unique=True
+    )
+    nickname = models.CharField(
+        max_length=150,
+        blank=False,
+        null=False,
+        unique=True
+    )
     num_badges = models.IntegerField(default=0)
     num_wins = models.IntegerField(default=0)
     num_losses = models.IntegerField(default=0)
     num_battles = models.IntegerField(default=0)
-    badges = models.ForeignKey(Badges, on_delete=models.CASCADE)
-    elite = models.ForeignKey(Elite, on_delete=models.CASCADE)
+    badges = models.ForeignKey(Badges, on_delete=models.CASCADE, null=True)
     battles = models.ManyToManyField(Battle)
 
 
@@ -67,8 +76,18 @@ class Leader(models.Model):
     Define a estrutuda de um Lider da liga.
     Um lider pode representar um Gym Leader ou um Elite Four.
     '''
-    name = models.CharField(max_length=150, blank=False, null=False)
-    nickname = models.CharField(max_length=150, blank=False, null=False)
+    name = models.CharField(
+        max_length=150,
+        blank=False,
+        null=False,
+        unique=True
+    )
+    nickname = models.CharField(
+        max_length=150,
+        blank=False,
+        null=False,
+        unique=True
+    )
     num_badges = models.IntegerField(default=0)
     num_wins = models.IntegerField(default=0)
     num_losses = models.IntegerField(default=0)

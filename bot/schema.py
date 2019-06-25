@@ -9,12 +9,12 @@ class Query(object):
     def resolve_check(self, info, **kwargs):
         return 'hello daddy'
 
-    quotes = graphene.List(graphene.String)
-    def resolve_quotes(self, info, **kwargs):
+    bot_quotes = graphene.List(graphene.String)
+    def resolve_bot_quotes(self, info, **kwargs):
         quotes = Quote.objects.all()
         return [quote.quote for quote in quotes]
 
-class CreateQuote(graphene.relay.ClientIDMutation):
+class BotCreateQuote(graphene.relay.ClientIDMutation):
     '''
     Registra um quote no banco de dados.
     '''
@@ -33,7 +33,7 @@ class CreateQuote(graphene.relay.ClientIDMutation):
         quote = _input.get('quote')
         registry = Quote.objects.create(quote=quote)
         registry.save()
-        return CreateQuote(registry.quote)
+        return BotCreateQuote(registry.quote)
 
 class Mutation:
-    create_quote = CreateQuote.Field()
+    bot_create_quote = BotCreateQuote.Field()

@@ -25,16 +25,25 @@ class Badges(models.Model):
     '''
     Define todas as insignias da liga
     '''
-    normal = models.BooleanField(default=False)
-    rock = models.BooleanField(default=False)
-    electric = models.BooleanField(default=False)
-    ghost = models.BooleanField(default=False)
-    ice = models.BooleanField(default=False)
-    poison = models.BooleanField(default=False)
-    water = models.BooleanField(default=False)
-    dark = models.BooleanField(default=False)
-    grass = models.BooleanField(default=False)
-    dragon = models.BooleanField(default=False)
+    BADGES = (
+        ('Normal', 'Normal'),
+        ('Rock', 'Rock'),
+        ('Electric', 'Electric'),
+        ('Ghost', 'Ghost'),
+        ('Ice', 'Ice'),
+        ('Poison', 'Poison'),
+        ('Water', 'Water'),
+        ('Dark', 'Dark'),
+        ('Grass', 'Grass'),
+        ('Dragon', 'Dragon'),
+    )
+
+    reference = models.CharField(
+        max_length=9,
+        choices=BADGES,
+        unique=True,
+        null=True
+    )
 
 
 class Trainer(models.Model):

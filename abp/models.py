@@ -1,3 +1,76 @@
 from django.db import models
 
-# Create your models here.
+class Quote(models.Model):
+    '''
+    Define a estrutura de um Quote, para
+    lembrar um pérola eternamente.
+    '''
+    quote = models.CharField(max_length=600, null=False, blank=False)
+
+
+class Battle(models.Model):
+    battling_trainer = models.ForeignKey(
+        'abp.Trainer',
+        on_delete=models.CASCADE
+    )
+    battling_leader = models.ForeignKey(
+        'abp.Leader',
+        on_delete=models.CASCADE
+    )
+    winner = models.CharField(max_length=100)
+    fight_date = models.DateField(auto_now_add=True)
+
+
+class Badges(models.Model):
+    '''
+    Define todas as insignias da liga
+    '''
+    normal = models.BooleanField(default=False)
+    rock = models.BooleanField(default=False)
+    electric = models.BooleanField(default=False)
+    ghost = models.BooleanField(default=False)
+    ice = models.BooleanField(default=False)
+    poison = models.BooleanField(default=False)
+    water = models.BooleanField(default=False)
+    dark = models.BooleanField(default=False)
+    grass = models.BooleanField(default=False)
+    dragon = models.BooleanField(default=False)
+
+class Elite(models.Model):
+    '''
+    Define a Elite Four
+    '''
+    bug = models.BooleanField(default=False)
+    steel = models.BooleanField(default=False)
+    fire = models.BooleanField(default=False)
+    fairy = models.BooleanField(default=False)
+    try_count = models.IntegerField(default=0)
+
+
+class Trainer(models.Model):
+    '''
+    Define a estrutura de um Treinador (participante da liga).
+    '''
+    name = models.CharField(max_length=150, blank=False, null=False)
+    nickname = models.CharField(max_length=150, blank=False, null=False)
+    num_badges = models.IntegerField(default=0)
+    num_wins = models.IntegerField(default=0)
+    num_losses = models.IntegerField(default=0)
+    num_battles = models.IntegerField(default=0)
+    badges = models.ForeignKey(Badges, on_delete=models.CASCADE)
+    elite = models.ForeignKey(Elite, on_delete=models.CASCADE)
+    battles = models.ManyToManyField(Battle)
+
+
+class Leader(models.Model):
+    '''
+    Define a estrutuda de um Lider da liga.
+    Um lider pode representar um Gym Leader ou um Elite Four.
+    '''
+    name = models.CharField(max_length=150, blank=False, null=False)
+    nickname = models.CharField(max_length=150, blank=False, null=False)
+    num_badges = models.IntegerField(default=0)
+    num_wins = models.IntegerField(default=0)
+    num_losses = models.IntegerField(default=0)
+    num_battles = models.IntegerField(default=0)
+    battles = models.ManyToManyField(Battle)

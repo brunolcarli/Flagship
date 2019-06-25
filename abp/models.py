@@ -59,6 +59,7 @@ class Trainer(models.Model):
     num_battles = models.IntegerField(default=0)
     badges = models.ForeignKey(Badges, on_delete=models.CASCADE, null=True)
     battles = models.ManyToManyField(Battle)
+    elite_tryouts = models.IntegerField(default=0)
 
 
 class Leader(models.Model):

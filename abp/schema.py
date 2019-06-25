@@ -1,5 +1,5 @@
 import graphene
-from abp.models import Quote, Trainer, Badges, Elite
+from abp.models import Quote, Trainer, Badges
 
 class TrainerType(graphene.ObjectType):
     '''
@@ -65,7 +65,7 @@ class CreateTrainer(graphene.relay.ClientIDMutation):
             name=name,
             nickname=nickname,
         )
-        
+
 
         trainer.save()
         return CreateTrainer(trainer)

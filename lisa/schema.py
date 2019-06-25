@@ -12,6 +12,7 @@ queries = (
 mutations = (
     graphene.ObjectType,
     bot.Mutation,
+    abp.Mutation
 )
 
 class Query(*queries):

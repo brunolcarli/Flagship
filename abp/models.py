@@ -36,16 +36,6 @@ class Badges(models.Model):
     grass = models.BooleanField(default=False)
     dragon = models.BooleanField(default=False)
 
-class Elite(models.Model):
-    '''
-    Define a Elite Four
-    '''
-    bug = models.BooleanField(default=False)
-    steel = models.BooleanField(default=False)
-    fire = models.BooleanField(default=False)
-    fairy = models.BooleanField(default=False)
-    try_count = models.IntegerField(default=0)
-
 
 class Trainer(models.Model):
     '''

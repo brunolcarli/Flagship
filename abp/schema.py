@@ -146,6 +146,7 @@ class CreateAbpQuote(graphene.relay.ClientIDMutation):
         registry.save()
         return CreateAbpQuote(registry.quote)
 
+
 class CreateLeader(graphene.relay.ClientIDMutation):
     '''
     Registra um treinador no banco de dados.
@@ -167,7 +168,6 @@ class CreateLeader(graphene.relay.ClientIDMutation):
 
         leader.save()
         return CreateLeader(leader)
-
 
 
 class CreateTrainer(graphene.relay.ClientIDMutation):
@@ -302,6 +302,7 @@ class CreateBattle(graphene.relay.ClientIDMutation):
             return CreateBattle(battle)
         else:
             raise Exception('Impossivel registrar batalha')
+
 
 class Mutation:
     create_abp_quote = CreateAbpQuote.Field()

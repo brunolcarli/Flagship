@@ -39,6 +39,10 @@ class LeaderType(graphene.ObjectType):
     num_wins = graphene.Int()
     num_losses = graphene.Int()
     num_battles = graphene.Int()
+    battles = graphene.List('abp.schema.BattleType')
+
+    def resolve_battles(self, info, **kwargs):
+        return Battle.objects.filter(battling_leader__exact=self)
 
 
 class TrainerType(graphene.ObjectType):
@@ -53,9 +57,13 @@ class TrainerType(graphene.ObjectType):
     num_losses = graphene.Int()
     num_battles = graphene.Int()
     badges = graphene.List(Badge)
+    battles = graphene.List('abp.schema.BattleType')
 
     def resolve_badges(self, info, **kwargs):
         return self.badges.all()
+
+    def resolve_battles(self, info, **kwargs):
+        return Battle.objects.filter(battling_trainer__exact=self)
 
 
 class BattleType(graphene.ObjectType):
@@ -66,6 +74,15 @@ class BattleType(graphene.ObjectType):
     leader = graphene.Field(LeaderType)
     winner = graphene.String()
     battle_datetime = graphene.DateTime()
+
+    def resolve_trainer(self, info, **kwargs):
+        return self.battling_trainer
+
+    def resolve_leader(self, info, **kwargs):
+        return self.battling_leader
+
+    def resolve_battle_datetime(self, info, **kwargs):
+        return self.fight_date
 
 
 class Query(object):
@@ -231,9 +248,53 @@ class AddBadgeToTrainer(graphene.relay.ClientIDMutation):
         return AddBadgeToTrainer    (trainer)
 
 
+class CreateBattle(graphene.relay.ClientIDMutation):
+    '''
+    Registra uma batalha
+    '''
+    battle = graphene.Field(BattleType)
+
+    class Input:
+        trainer_nickname = graphene.String()
+        leader_nickname = graphene.String()
+        winner = graphene.String()
+
+    def mutate_and_get_payload(self, info, **_input):
+
+        trainer = _input.get('trainer_nickname')
+        leader = _input.get('leader_nickname')
+        winner = _input.get('winner')
+
+        try:
+            trainer = Trainer.objects.get(nickname=trainer)
+        except Exception as ex:
+            raise ex
+
+        try:
+            leader = Leader.objects.get(nickname=leader)
+        except Exception as ex:
+            raise ex
+
+        if winner != trainer.nickname and winner != leader.nickname:
+            raise Exception(
+                'O vencedor deve ser um dos dois players fornecidos!'
+            )
+
+        if trainer and leader:
+            battle = Battle.objects.create(
+                battling_trainer=trainer,
+                battling_leader=leader,
+                winner=winner
+            )
+            battle.save()
+            return CreateBattle(battle)
+        else:
+            raise Exception('Impossivel registrar batalha')
+
 class Mutation:
     create_abp_quote = CreateAbpQuote.Field()
     create_trainer = CreateTrainer.Field()
     create_badge = CreateBadge.Field()
     add_badge_to_trainer = AddBadgeToTrainer.Field()
     create_leader = CreateLeader.Field()
+    create_battle = CreateBattle.Field()

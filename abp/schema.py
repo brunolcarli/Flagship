@@ -1,5 +1,5 @@
 import graphene
-from abp.models import Quote, Trainer, Badges
+from abp.models import Quote, Trainer, Badges, Leader
 
 
 class BadgeType(graphene.Enum):
@@ -27,6 +27,18 @@ class Badge(graphene.ObjectType):
     '''
     id = graphene.ID()
     reference = BadgeType()
+
+
+class LeaderType(graphene.ObjectType):
+    '''
+    Objeto GraphQl para um lider
+    '''
+    id = graphene.ID()
+    name = graphene.String()
+    nickname = graphene.String()
+    num_wins = graphene.Int()
+    num_losses = graphene.Int()
+    num_battles = graphene.Int()
 
 
 class TrainerType(graphene.ObjectType):
@@ -71,6 +83,13 @@ class Query(object):
         badges = Badges.objects.all()
         return badges
 
+    # TODO add description
+    abp_leaders = graphene.List(LeaderType)
+    def resolve_abp_leaders(self, info, **kwargs):
+        # TODO add docstring
+        leaders = Leader.objects.all()
+        return leaders
+
 
 class CreateAbpQuote(graphene.relay.ClientIDMutation):
     '''
@@ -92,6 +111,29 @@ class CreateAbpQuote(graphene.relay.ClientIDMutation):
         registry = Quote.objects.create(quote=quote)
         registry.save()
         return CreateAbpQuote(registry.quote)
+
+class CreateLeader(graphene.relay.ClientIDMutation):
+    '''
+    Registra um treinador no banco de dados.
+    '''
+
+    leader = graphene.Field(LeaderType)
+
+    class Input:
+        name = graphene.String()
+        nickname = graphene.String()
+
+    def mutate_and_get_payload(self, info, **_input):
+        name = _input.get('name')
+        nickname = _input.get('nickname')
+        leader = Leader.objects.create(
+            name=name,
+            nickname=nickname,
+        )
+
+        leader.save()
+        return CreateLeader(leader)
+
 
 
 class CreateTrainer(graphene.relay.ClientIDMutation):
@@ -177,3 +219,4 @@ class Mutation:
     create_trainer = CreateTrainer.Field()
     create_badge = CreateBadge.Field()
     add_badge_to_trainer = AddBadgeToTrainer.Field()
+    create_leader = CreateLeader.Field()

@@ -2,6 +2,33 @@ import graphene
 from abp.models import Quote, Trainer, Badges
 
 
+class BadgeType(graphene.Enum):
+    NORMAL = 'Normal'
+    ROCK = 'Rock'
+    ELECTRIC = 'Electric'
+    GHOST = 'Ghost' 
+    ICE = 'Ice'
+    POISON = 'Poison' 
+    WATER = 'Water'
+    DARK = 'Dark'
+    GRASS = 'Grss'
+    DRAGON = 'Dragon'
+
+    @property
+    def description(self):
+        if self == Badge.DRAGON:
+            return 'Dragon Badge;\nLeader: Bruno'
+        return 'Other badge'
+
+
+class Badge(graphene.ObjectType):
+    '''
+    Define a estrututa GraphQL para uma insígnia.
+    '''
+    id = graphene.ID()
+    reference = BadgeType()
+
+
 class TrainerType(graphene.ObjectType):
     '''
     Objeto GraphQl para um Trainer.
@@ -13,7 +40,7 @@ class TrainerType(graphene.ObjectType):
     num_wins = graphene.Int()
     num_losses = graphene.Int()
     num_battles = graphene.Int()
-    badges = graphene.List(graphene.String)
+    badges = graphene.List(Badge)
 
 
 class Query(object):
@@ -33,6 +60,13 @@ class Query(object):
         # TODO add docstring
         trainers = Trainer.objects.all()
         return trainers
+
+    # TODO add description
+    abp_badges = graphene.List(Badge)
+    def resolve_abp_badges(self, info, **kwargs):
+        # TODO add docstring
+        badges = Badges.objects.all()
+        return badges
 
 
 class CreateAbpQuote(graphene.relay.ClientIDMutation):
@@ -80,6 +114,31 @@ class CreateTrainer(graphene.relay.ClientIDMutation):
         return CreateTrainer(trainer)
 
 
+class CreateBadge(graphene.relay.ClientIDMutation):
+    '''
+    Registra uma insígnia no banco de dados
+    '''
+    badge = graphene.Field(Badge)
+
+    class Input:
+        reference = BadgeType()
+
+    def mutate_and_get_payload(self, info, **_input):
+        # TODO add docstring
+        badge = _input.get('reference')
+        if badge:
+            try:
+                created_badge = Badges.objects.create(reference=badge)
+                created_badge.save()
+            except Exception as ex:
+                raise(ex)
+        else:
+            raise Exception("None given")
+
+        return CreateBadge(created_badge)
+
+
 class Mutation:
     create_abp_quote = CreateAbpQuote.Field()
     create_trainer = CreateTrainer.Field()
+    create_badge = CreateBadge.Field()

@@ -10,4 +10,52 @@ API pessoal
 
 </td></tr></table>
 
-# Under development
+[Lisa](https://en.wikipedia.org/wiki/Lisa_Simpson) (homenagem à fantástica personagem de Matt Groening) é uma API de propósito geral.
+
+Atualmente serve como backend para Bots que ~~ainda~~ estão em desenvolvimento.
+
+# Rodando
+
+## Local
+
+[Crie um ambiente virtual](https://www.treinaweb.com.br/blog/criando-ambientes-virtuais-para-projetos-python-com-o-virtualenv/) (venv) e installe os requirements:
+
+```
+make install
+```
+
+Rode as migrações do banco de dados:
+
+```
+make migrate
+```
+
+Suba o servidor:
+
+```
+make run
+```
+
+Os server local estará rodando em: `localhost:8000/graphql/`
+
+## Docker
+
+
+
+<table align="center"><tr><td align="center" width="9999">
+ 
+```
+                    ##        .            
+              ## ## ##       ==            
+           ## ## ## ##      ===            
+       /""""""""""""""""\___/ ===        
+  ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~   
+       \______ o          __/            
+         \    \        __/             
+          \____\______/                
+```
+
+# Sorry
+
+The docker option is currently under development.
+</td></tr></table>

@@ -42,6 +42,9 @@ class TrainerType(graphene.ObjectType):
     num_battles = graphene.Int()
     badges = graphene.List(Badge)
 
+    def resolve_badges(self, info, **kwargs):
+        return self.badges.all()
+
 
 class Query(object):
     '''
@@ -138,7 +141,39 @@ class CreateBadge(graphene.relay.ClientIDMutation):
         return CreateBadge(created_badge)
 
 
+class AddBadgeToTrainer(graphene.relay.ClientIDMutation):
+    '''
+    Adiciona uma insiígnia à um treinador.
+    '''
+    trainer = graphene.Field(TrainerType)
+
+    class Input:
+        badge_id = graphene.ID()
+        trainer_id = graphene.ID()
+
+    def mutate_and_get_payload(self, info, **_input):
+        # TODO add docstring
+        badge_id = _input.get('badge_id')
+        trainer_id = _input.get('trainer_id')
+
+        try:
+            badge_to_give = Badges.objects.get(id=badge_id)
+        except Exception as ex:
+            raise ex
+
+        if badge_to_give:
+            try:
+                trainer = Trainer.objects.get(id=trainer_id)
+            except Exception as ex:
+                raise ex
+            if trainer:
+                trainer.badges.add(badge_to_give)
+                trainer.save()
+        return AddBadgeToTrainer    (trainer)
+
+
 class Mutation:
     create_abp_quote = CreateAbpQuote.Field()
     create_trainer = CreateTrainer.Field()
     create_badge = CreateBadge.Field()
+    add_badge_to_trainer = AddBadgeToTrainer.Field()

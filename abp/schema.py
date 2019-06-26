@@ -97,11 +97,18 @@ class Query(object):
         return [quote.quote for quote in quotes]
 
     # TODO add description
-    abp_trainers = graphene.List(TrainerType)
+    abp_trainers = graphene.List(
+        TrainerType,
+        nickname=graphene.String()
+    )
     def resolve_abp_trainers(self, info, **kwargs):
         # TODO add docstring
-        trainers = Trainer.objects.all()
-        return trainers
+        nick = kwargs.get('nickname')
+        if nick:
+            response = Trainer.objects.filter(nickname=nick)
+        else:
+            response = Trainer.objects.all()
+        return response
 
     # TODO add description
     abp_badges = graphene.List(Badge)

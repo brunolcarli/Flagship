@@ -279,6 +279,18 @@ class CreateBattle(graphene.relay.ClientIDMutation):
             raise Exception(
                 'O vencedor deve ser um dos dois players fornecidos!'
             )
+        else:
+            if winner == trainer.nickname:
+                trainer.num_wins += 1
+                leader.num_losses += 1
+            else:
+                leader.num_wins += 1
+                trainer.num_losses += 1
+
+            trainer.num_battles += 1
+            leader.num_battles += 1
+            trainer.save()
+            leader.save()
 
         if trainer and leader:
             battle = Battle.objects.create(

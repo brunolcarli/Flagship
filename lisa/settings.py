@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'graphene_django',
     'bot',
+    'abp',
 ]
 
 MIDDLEWARE = [

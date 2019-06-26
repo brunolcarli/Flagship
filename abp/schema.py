@@ -1,6 +1,7 @@
 import graphene
 from abp.models import Quote, Trainer, Badges
 
+
 class TrainerType(graphene.ObjectType):
     '''
     Objeto GraphQl para um Trainer.
@@ -19,10 +20,19 @@ class Query(object):
     '''
     Queries para a aplicação ABP.
     '''
+    # TODO add description
     abp_quotes = graphene.List(graphene.String)
     def resolve_abp_quotes(self, info, **kwargs):
+        # TODO add docstring
         quotes = Quote.objects.all()
         return [quote.quote for quote in quotes]
+
+    # TODO add description
+    abp_trainers = graphene.List(TrainerType)
+    def resolve_abp_trainers(self, info, **kwargs):
+        # TODO add docstring
+        trainers = Trainer.objects.all()
+        return trainers
 
 
 class CreateAbpQuote(graphene.relay.ClientIDMutation):
@@ -65,7 +75,6 @@ class CreateTrainer(graphene.relay.ClientIDMutation):
             name=name,
             nickname=nickname,
         )
-
 
         trainer.save()
         return CreateTrainer(trainer)

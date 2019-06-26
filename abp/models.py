@@ -68,7 +68,7 @@ class Trainer(models.Model):
     num_battles = models.IntegerField(default=0)
     battles = models.ManyToManyField(Battle)
     elite_tryouts = models.IntegerField(default=0)
-    badges = models.ManyToManyField(Badges, null=True)
+    badges = models.ManyToManyField(Badges)
 
 
 class Leader(models.Model):

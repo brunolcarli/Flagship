@@ -1,5 +1,5 @@
 import graphene
-from abp.models import Quote, Trainer, Badges, Leader
+from abp.models import Quote, Trainer, Badges, Leader, Battle
 
 
 class BadgeType(graphene.Enum):
@@ -58,6 +58,16 @@ class TrainerType(graphene.ObjectType):
         return self.badges.all()
 
 
+class BattleType(graphene.ObjectType):
+    '''
+    Objeto graphql para o registro de uma batalha
+    '''
+    trainer = graphene.Field(TrainerType)
+    leader = graphene.Field(LeaderType)
+    winner = graphene.String()
+    battle_datetime = graphene.DateTime()
+
+
 class Query(object):
     '''
     Queries para a aplicação ABP.
@@ -89,6 +99,13 @@ class Query(object):
         # TODO add docstring
         leaders = Leader.objects.all()
         return leaders
+
+    # TODO add description
+    abp_battles = graphene.List(BattleType)
+    def resolve_abp_battles(self, info, **kwargs):
+        # TODO add docstring
+        battles = Battle.objects.all()
+        return battles
 
 
 class CreateAbpQuote(graphene.relay.ClientIDMutation):

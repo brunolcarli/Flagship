@@ -118,11 +118,18 @@ class Query(object):
         return badges
 
     # TODO add description
-    abp_leaders = graphene.List(LeaderType)
+    abp_leaders = graphene.List(
+        LeaderType,
+        nickname=graphene.String()
+    )
     def resolve_abp_leaders(self, info, **kwargs):
         # TODO add docstring
-        leaders = Leader.objects.all()
-        return leaders
+        nick = kwargs.get('nickname')
+        if nick:
+            response = Leader.objects.filter(nickname=nick)
+        else:
+            response = Leader.objects.all()
+        return response
 
     # TODO add description
     abp_battles = graphene.List(BattleType)

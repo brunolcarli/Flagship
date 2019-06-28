@@ -74,7 +74,6 @@ class TrainerType(graphene.ObjectType):
     Objeto GraphQl para um Trainer.
     '''
     id = graphene.ID()
-    name = graphene.String()
     nickname = graphene.String()
     is_winner = graphene.Boolean()
     num_wins = graphene.Int()
@@ -244,16 +243,13 @@ class CreateTrainer(graphene.relay.ClientIDMutation):
     trainer = graphene.Field(TrainerType)
 
     class Input:
-        name = graphene.String()
         nickname = graphene.String()
 
     def mutate_and_get_payload(self, info, **_input):
-        name = _input.get('name')
         nickname = _input.get('nickname')
     
         try:
             trainer = Trainer.objects.create(
-                name=name,
                 nickname=nickname,
             )
         except:

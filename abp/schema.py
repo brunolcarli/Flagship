@@ -110,6 +110,16 @@ class BattleType(graphene.ObjectType):
         return self.fight_date
 
 
+class Score(graphene.ObjectType):
+    '''
+    Objeto GraphQL para o placar da liga
+    '''
+    trainers = graphene.List(TrainerType)
+
+    def resolve_trainers(self, info, **kwargs):
+        return self
+
+
 class Query(object):
     '''
     Queries para a aplicação ABP.
@@ -162,6 +172,13 @@ class Query(object):
         # TODO add docstring
         battles = Battle.objects.all()
         return battles
+
+    # TODO add description
+    abp_score_board = graphene.Field(Score)
+    def resolve_abp_score_board(self, info, **kwargs):
+        # TODO add docstring
+        trainers = Trainer.objects.all()
+        return trainers
 
 
 class CreateAbpQuote(graphene.relay.ClientIDMutation):
@@ -291,7 +308,7 @@ class AddBadgeToTrainer(graphene.relay.ClientIDMutation):
             if trainer:
                 trainer.badges.add(badge_to_give)
                 trainer.save()
-        return AddBadgeToTrainer    (trainer)
+        return AddBadgeToTrainer(trainer)
 
 
 class CreateBattle(graphene.relay.ClientIDMutation):

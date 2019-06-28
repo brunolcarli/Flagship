@@ -57,7 +57,6 @@ class LeaderType(graphene.ObjectType):
     Objeto GraphQl para um lider
     '''
     id = graphene.ID()
-    name = graphene.String()
     nickname = graphene.String()
     num_wins = graphene.Int()
     num_losses = graphene.Int()
@@ -211,7 +210,6 @@ class CreateLeader(graphene.relay.ClientIDMutation):
     leader = graphene.Field(LeaderType)
 
     class Input:
-        name = graphene.String()
         nickname = graphene.String()
         pokemon_type = PokemonTypeTrainer()
         role = Roles()

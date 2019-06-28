@@ -287,22 +287,22 @@ class AddBadgeToTrainer(graphene.relay.ClientIDMutation):
     trainer = graphene.Field(TrainerType)
 
     class Input:
-        badge_id = graphene.ID()
-        trainer_id = graphene.ID()
+        badge = BadgeType()
+        trainer = graphene.String()
 
     def mutate_and_get_payload(self, info, **_input):
         # TODO add docstring
-        badge_id = _input.get('badge_id')
-        trainer_id = _input.get('trainer_id')
+        badge = _input.get('badge')
+        trainer = _input.get('trainer')
 
         try:
-            badge_to_give = Badges.objects.get(id=badge_id)
+            badge_to_give = Badges.objects.get(reference=badge)
         except Exception as ex:
             raise ex
 
         if badge_to_give:
             try:
-                trainer = Trainer.objects.get(id=trainer_id)
+                trainer = Trainer.objects.get(nickname=trainer)
             except Exception as ex:
                 raise ex
             if trainer:

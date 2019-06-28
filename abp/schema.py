@@ -214,14 +214,12 @@ class CreateLeader(graphene.relay.ClientIDMutation):
         role = Roles()
 
     def mutate_and_get_payload(self, info, **_input):
-        name = _input.get('name')
         nickname = _input.get('nickname')
         pokemon_type = _input.get('pokemon_type')
         role = _input.get('role')
 
         try:
             leader = Leader.objects.create(
-                name=name,
                 nickname=nickname,
                 role=role,
                 pokemon_type=pokemon_type

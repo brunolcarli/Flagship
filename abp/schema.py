@@ -17,7 +17,7 @@ class PokemonTypeTrainer(graphene.Enum):
     POISON = 'Poison' 
     WATER = 'Water'
     DARK = 'Dark'
-    GRASS = 'Grss'
+    GRASS = 'Grass'
     DRAGON = 'Dragon'
     FIRE = 'Fire'
     BUG = 'Bug'
@@ -34,7 +34,7 @@ class BadgeType(graphene.Enum):
     POISON = 'Poison' 
     WATER = 'Water'
     DARK = 'Dark'
-    GRASS = 'Grss'
+    GRASS = 'G0arss'
     DRAGON = 'Dragon'
 
     @property

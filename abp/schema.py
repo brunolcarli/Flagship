@@ -243,7 +243,6 @@ class CreateTrainer(graphene.relay.ClientIDMutation):
     '''
     Registra um treinador no banco de dados.
     '''
-
     trainer = graphene.Field(TrainerType)
 
     class Input:
@@ -253,12 +252,18 @@ class CreateTrainer(graphene.relay.ClientIDMutation):
     def mutate_and_get_payload(self, info, **_input):
         name = _input.get('name')
         nickname = _input.get('nickname')
-        trainer = Trainer.objects.create(
-            name=name,
-            nickname=nickname,
-        )
+    
+        try:
+            trainer = Trainer.objects.create(
+                name=name,
+                nickname=nickname,
+            )
+        except:
+            raise Exception('Um treinador com este nome ja está cadastrado!')
 
-        trainer.save()
+        else:
+            trainer.save()
+
         return CreateTrainer(trainer)
 
 

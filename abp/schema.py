@@ -282,11 +282,12 @@ class CreateBadge(graphene.relay.ClientIDMutation):
         if badge:
             try:
                 created_badge = Badges.objects.create(reference=badge)
+            except Exception:
+                raise('Uma insígnia deste tipo ja foi cadastrada!')
+            else:
                 created_badge.save()
-            except Exception as ex:
-                raise(ex)
         else:
-            raise Exception("None given")
+            raise Exception("Nenhuma insígnia fornecida.")
 
         return CreateBadge(created_badge)
 

@@ -222,14 +222,20 @@ class CreateLeader(graphene.relay.ClientIDMutation):
         pokemon_type = _input.get('pokemon_type')
         role = _input.get('role')
 
-        leader = Leader.objects.create(
-            name=name,
-            nickname=nickname,
-            role=role,
-            pokemon_type=pokemon_type
-        )
+        try:
+            leader = Leader.objects.create(
+                name=name,
+                nickname=nickname,
+                role=role,
+                pokemon_type=pokemon_type
+            )
+        except:
+            # TODO criar módulo de exceptions e levantar exception customizada
+            raise Exception('Um líder com este nome ja está cadastrado.')
 
-        leader.save()
+        else:
+            leader.save()
+
         return CreateLeader(leader)
 
 

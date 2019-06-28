@@ -2,6 +2,29 @@ import graphene
 from abp.models import Quote, Trainer, Badges, Leader, Battle
 
 
+class Roles(graphene.Enum):
+    GYM_LEADER = 'Gym Leader'
+    ELITE_FOUR = 'Elite Four'
+    CHAMPION = 'Champion'
+
+
+class PokemonTypeTrainer(graphene.Enum):
+    NORMAL = 'Normal'
+    ROCK = 'Rock'
+    ELECTRIC = 'Electric'
+    GHOST = 'Ghost' 
+    ICE = 'Ice'
+    POISON = 'Poison' 
+    WATER = 'Water'
+    DARK = 'Dark'
+    GRASS = 'Grass'
+    DRAGON = 'Dragon'
+    FIRE = 'Fire'
+    BUG = 'Bug'
+    FAIRY = 'Fairy'
+    STEEL = 'Steel'
+
+
 class BadgeType(graphene.Enum):
     NORMAL = 'Normal'
     ROCK = 'Rock'
@@ -11,7 +34,7 @@ class BadgeType(graphene.Enum):
     POISON = 'Poison' 
     WATER = 'Water'
     DARK = 'Dark'
-    GRASS = 'Grss'
+    GRASS = 'G0arss'
     DRAGON = 'Dragon'
 
     @property
@@ -34,12 +57,13 @@ class LeaderType(graphene.ObjectType):
     Objeto GraphQl para um lider
     '''
     id = graphene.ID()
-    name = graphene.String()
     nickname = graphene.String()
     num_wins = graphene.Int()
     num_losses = graphene.Int()
     num_battles = graphene.Int()
     battles = graphene.List('abp.schema.BattleType')
+    pokemon_type = PokemonTypeTrainer()
+    role = Roles()
 
     def resolve_battles(self, info, **kwargs):
         return Battle.objects.filter(battling_leader__exact=self)
@@ -50,7 +74,6 @@ class TrainerType(graphene.ObjectType):
     Objeto GraphQl para um Trainer.
     '''
     id = graphene.ID()
-    name = graphene.String()
     nickname = graphene.String()
     is_winner = graphene.Boolean()
     num_wins = graphene.Int()
@@ -85,6 +108,16 @@ class BattleType(graphene.ObjectType):
         return self.fight_date
 
 
+class Score(graphene.ObjectType):
+    '''
+    Objeto GraphQL para o placar da liga
+    '''
+    trainers = graphene.List(TrainerType)
+
+    def resolve_trainers(self, info, **kwargs):
+        return self
+
+
 class Query(object):
     '''
     Queries para a aplicação ABP.
@@ -97,11 +130,18 @@ class Query(object):
         return [quote.quote for quote in quotes]
 
     # TODO add description
-    abp_trainers = graphene.List(TrainerType)
+    abp_trainers = graphene.List(
+        TrainerType,
+        nickname=graphene.String()
+    )
     def resolve_abp_trainers(self, info, **kwargs):
         # TODO add docstring
-        trainers = Trainer.objects.all()
-        return trainers
+        nick = kwargs.get('nickname')
+        if nick:
+            response = Trainer.objects.filter(nickname=nick)
+        else:
+            response = Trainer.objects.all()
+        return response
 
     # TODO add description
     abp_badges = graphene.List(Badge)
@@ -111,11 +151,18 @@ class Query(object):
         return badges
 
     # TODO add description
-    abp_leaders = graphene.List(LeaderType)
+    abp_leaders = graphene.List(
+        LeaderType,
+        nickname=graphene.String()
+    )
     def resolve_abp_leaders(self, info, **kwargs):
         # TODO add docstring
-        leaders = Leader.objects.all()
-        return leaders
+        nick = kwargs.get('nickname')
+        if nick:
+            response = Leader.objects.filter(nickname=nick)
+        else:
+            response = Leader.objects.all()
+        return response
 
     # TODO add description
     abp_battles = graphene.List(BattleType)
@@ -123,6 +170,13 @@ class Query(object):
         # TODO add docstring
         battles = Battle.objects.all()
         return battles
+
+    # TODO add description
+    abp_score_board = graphene.Field(Score)
+    def resolve_abp_score_board(self, info, **kwargs):
+        # TODO add docstring
+        trainers = Trainer.objects.all()
+        return trainers
 
 
 class CreateAbpQuote(graphene.relay.ClientIDMutation):
@@ -155,18 +209,28 @@ class CreateLeader(graphene.relay.ClientIDMutation):
     leader = graphene.Field(LeaderType)
 
     class Input:
-        name = graphene.String()
         nickname = graphene.String()
+        pokemon_type = PokemonTypeTrainer()
+        role = Roles()
 
     def mutate_and_get_payload(self, info, **_input):
-        name = _input.get('name')
         nickname = _input.get('nickname')
-        leader = Leader.objects.create(
-            name=name,
-            nickname=nickname,
-        )
+        pokemon_type = _input.get('pokemon_type')
+        role = _input.get('role')
 
-        leader.save()
+        try:
+            leader = Leader.objects.create(
+                nickname=nickname,
+                role=role,
+                pokemon_type=pokemon_type
+            )
+        except Exception as ex:
+            # TODO criar módulo de exceptions e levantar exception customizada
+            raise Exception(ex)
+
+        else:
+            leader.save()
+
         return CreateLeader(leader)
 
 
@@ -174,22 +238,24 @@ class CreateTrainer(graphene.relay.ClientIDMutation):
     '''
     Registra um treinador no banco de dados.
     '''
-
     trainer = graphene.Field(TrainerType)
 
     class Input:
-        name = graphene.String()
         nickname = graphene.String()
 
     def mutate_and_get_payload(self, info, **_input):
-        name = _input.get('name')
         nickname = _input.get('nickname')
-        trainer = Trainer.objects.create(
-            name=name,
-            nickname=nickname,
-        )
+    
+        try:
+            trainer = Trainer.objects.create(
+                nickname=nickname,
+            )
+        except:
+            raise Exception('Um treinador com este nome ja está cadastrado!')
 
-        trainer.save()
+        else:
+            trainer.save()
+
         return CreateTrainer(trainer)
 
 
@@ -208,11 +274,12 @@ class CreateBadge(graphene.relay.ClientIDMutation):
         if badge:
             try:
                 created_badge = Badges.objects.create(reference=badge)
+            except Exception:
+                raise('Uma insígnia deste tipo ja foi cadastrada!')
+            else:
                 created_badge.save()
-            except Exception as ex:
-                raise(ex)
         else:
-            raise Exception("None given")
+            raise Exception("Nenhuma insígnia fornecida.")
 
         return CreateBadge(created_badge)
 
@@ -224,28 +291,28 @@ class AddBadgeToTrainer(graphene.relay.ClientIDMutation):
     trainer = graphene.Field(TrainerType)
 
     class Input:
-        badge_id = graphene.ID()
-        trainer_id = graphene.ID()
+        badge = BadgeType()
+        trainer = graphene.String()
 
     def mutate_and_get_payload(self, info, **_input):
         # TODO add docstring
-        badge_id = _input.get('badge_id')
-        trainer_id = _input.get('trainer_id')
+        badge = _input.get('badge')
+        trainer = _input.get('trainer')
 
         try:
-            badge_to_give = Badges.objects.get(id=badge_id)
+            badge_to_give = Badges.objects.get(reference=badge)
         except Exception as ex:
             raise ex
 
         if badge_to_give:
             try:
-                trainer = Trainer.objects.get(id=trainer_id)
+                trainer = Trainer.objects.get(nickname=trainer)
             except Exception as ex:
                 raise ex
             if trainer:
                 trainer.badges.add(badge_to_give)
                 trainer.save()
-        return AddBadgeToTrainer    (trainer)
+        return AddBadgeToTrainer(trainer)
 
 
 class CreateBattle(graphene.relay.ClientIDMutation):

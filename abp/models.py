@@ -50,12 +50,6 @@ class Trainer(models.Model):
     '''
     Define a estrutura de um Treinador (participante da liga).
     '''
-    name = models.CharField(
-        max_length=150,
-        blank=False,
-        null=False,
-        unique=True
-    )
     nickname = models.CharField(
         max_length=150,
         blank=False,
@@ -96,12 +90,6 @@ class Leader(models.Model):
         ('Gym Leader', 'Gym Leader'),
         ('Elite Four', 'Elite Four'),
         ('Champion', 'Champion')
-    )
-    name = models.CharField(
-        max_length=150,
-        blank=False,
-        null=False,
-        unique=True
     )
     nickname = models.CharField(
         max_length=150,

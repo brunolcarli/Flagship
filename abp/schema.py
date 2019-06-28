@@ -224,9 +224,9 @@ class CreateLeader(graphene.relay.ClientIDMutation):
                 role=role,
                 pokemon_type=pokemon_type
             )
-        except:
+        except Exception as ex:
             # TODO criar módulo de exceptions e levantar exception customizada
-            raise Exception('Um líder com este nome ja está cadastrado.')
+            raise Exception(ex)
 
         else:
             leader.save()

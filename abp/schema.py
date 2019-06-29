@@ -34,7 +34,7 @@ class BadgeType(graphene.Enum):
     POISON = 'Poison' 
     WATER = 'Water'
     DARK = 'Dark'
-    GRASS = 'G0arss'
+    GRASS = 'Grass'
     DRAGON = 'Dragon'
 
     @property

@@ -36,6 +36,7 @@ class Badges(models.Model):
         ('Dark', 'Dark'),
         ('Grass', 'Grass'),
         ('Dragon', 'Dragon'),
+        ('Psychic', 'Psychic')
     )
 
     reference = models.CharField(
@@ -84,7 +85,8 @@ class Leader(models.Model):
         ('Bug', 'Bug'),
         ('Steel', 'Steel'),
         ('Fire', 'Fire'),
-        ('Fairy', 'Fairy')
+        ('Fairy', 'Fairy'),
+        ('Psychic', 'Psychic')
     )
     ROLES = (
         ('Gym Leader', 'Gym Leader'),

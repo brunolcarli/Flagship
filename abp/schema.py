@@ -23,19 +23,21 @@ class PokemonTypeTrainer(graphene.Enum):
     BUG = 'Bug'
     FAIRY = 'Fairy'
     STEEL = 'Steel'
+    PSYCHIC = 'Psychic'
 
 
 class BadgeType(graphene.Enum):
     NORMAL = 'Normal'
     ROCK = 'Rock'
     ELECTRIC = 'Electric'
-    GHOST = 'Ghost' 
+    GHOST = 'Ghost'
     ICE = 'Ice'
     POISON = 'Poison' 
     WATER = 'Water'
     DARK = 'Dark'
-    GRASS = 'G0arss'
+    GRASS = 'Grass'
     DRAGON = 'Dragon'
+    PSYCHIC = 'Psychic'
 
     @property
     def description(self):

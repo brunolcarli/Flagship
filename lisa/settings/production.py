@@ -4,23 +4,24 @@ from lisa.settings.common import *
 import dotenv
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('MYSQL_DATABASE'),
-        'USER': config('MYSQL_USER'),
-        'PASSWORD': config('MYSQL_PASSWORD'),
-        'HOST': 'db',
-        'PORT': 3306,
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': config('MYSQL_DATABASE'),
+#         'USER': config('MYSQL_USER'),
+#         'PASSWORD': config('MYSQL_PASSWORD'),
+#         'HOST': 'db',
+#         'PORT': 3306,
+#     }
+# }
+
 
 #configs para o heroku
 cwd = os.getcwd()
 if cwd == '/app' or cwd[:4] == '/tmp':
     import dj_database_url
     DATABASES = {
-        'default':dj_database_url.config(default='default')
+        'default':dj_database_url.config(default='DATABASE_URL')
     }
     # Honra o cabecalho 'X-forwarded-proto' para request.is_secure()
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

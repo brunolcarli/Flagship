@@ -15,6 +15,17 @@ import dotenv
 #     }
 # }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'mydb',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+
 
 #configs para o heroku
 cwd = os.getcwd()

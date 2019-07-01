@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'bot',
     'abp',
     'gunicorn',
-    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -129,4 +128,3 @@ GRAPHENE = {
     'SCHEMA': 'lisa.schema.schema',
 }
 
-CORS_ORIGIN_ALLOW_ALL = True

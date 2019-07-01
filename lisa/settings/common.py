@@ -26,7 +26,7 @@ SECRET_KEY = 'en+&yos1!_uq!fl18gw_eexghxb6x@zsc^(!=3ft)^&^^&k7_x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'bot',
     'abp',
     'gunicorn',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,5 @@ STATIC_URL = '/static/'
 GRAPHENE = {
     'SCHEMA': 'lisa.schema.schema',
 }
+
+CORS_ORIGIN_ALLOW_ALL = True

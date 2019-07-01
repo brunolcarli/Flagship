@@ -1,6 +1,8 @@
 import os
 from decouple import config
 from lisa.settings.common import *
+import dotenv
+
 
 # DATABASES = {
 #     'default': {
@@ -19,7 +21,7 @@ cwd = os.getcwd()
 if cwd == '/app' or cwd[:4] == '/tmp':
     import dj_database_url
     DATABASES = {
-    'default':dj_database_url.config(default='postgres://localhost')
+        'default':dj_database_url.config(default='postgres://localhost')
     }
     # Honra o cabecalho 'X-forwarded-proto' para request.is_secure()
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -42,3 +44,7 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 MEDIA_URL = '/media/'
+
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)

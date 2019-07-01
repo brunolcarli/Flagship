@@ -38,6 +38,7 @@ class BadgeType(graphene.Enum):
     GRASS = 'Grass'
     DRAGON = 'Dragon'
     PSYCHIC = 'Psychic'
+    FAIRY = 'Fairy'
 
     @property
     def description(self):

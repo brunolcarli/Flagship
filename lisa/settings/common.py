@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'graphene_django',
     'bot',
     'abp',
+    'r2d2',
     'gunicorn',
 ]
 

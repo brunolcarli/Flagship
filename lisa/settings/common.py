@@ -26,7 +26,7 @@ SECRET_KEY = 'en+&yos1!_uq!fl18gw_eexghxb6x@zsc^(!=3ft)^&^^&k7_x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'lisa.urls'
@@ -127,3 +128,4 @@ STATIC_URL = '/static/'
 GRAPHENE = {
     'SCHEMA': 'lisa.schema.schema',
 }
+

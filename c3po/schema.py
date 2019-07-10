@@ -14,6 +14,16 @@ class Query(object):
         quotes = C3POQuote.objects.all()
         return [quote.quote for quote in quotes]
 
+    c3po_not_sure = graphene.List(
+        graphene.String
+    )
+    def resolve_c3po_not_sure(self, info, **kwargs):
+        '''
+        Retorna os quotes para péssima idéias.
+        '''
+        quotes = quotes = C3POQuote.objects.all()
+        return [quote.quote for quote in quotes if quote.is_not_sure]
+
 
 class CreateC3POQuote(graphene.relay.ClientIDMutation):
     '''
@@ -28,10 +38,16 @@ class CreateC3POQuote(graphene.relay.ClientIDMutation):
             required=True,
             description='A quote to be forever remembered.'
         )
+        bad_idea = graphene.Boolean(
+            required=False,
+            description='Indicates if this is to be an bad ideia quote'
+        )
 
     def mutate_and_get_payload(self, info, **_input):
         quote = _input.get('quote')
-        registry = C3POQuote.objects.create(quote=quote)
+        bad_idea = _input.get('bad_idea', False)
+
+        registry = C3POQuote.objects.create(quote=quote, is_not_sure=bad_idea)
         registry.save()
         return CreateC3POQuote(registry.quote)
 

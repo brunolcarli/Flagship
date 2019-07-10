@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'abp',
     'r2d2',
     'gunicorn',
+    'c3po',
 ]
 
 MIDDLEWARE = [

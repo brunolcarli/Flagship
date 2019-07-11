@@ -88,4 +88,12 @@ conversations = [
         "Tivemos alguns problemas ...",
         "Não. Cale-os todos para baixo! Depressa!",
     ],
+    [
+        'Java',
+        'Java the Hutt, lider dos caçadores de recompensas em Tatooine?',
+        'Java',
+        'Falou em java travou meu compilador.',
+        'Java',
+        'https://starwarsblog.starwars.com/wp-content/uploads/2018/06/jabba-sideshow-tall.jpg',
+    ]
 ]

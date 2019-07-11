@@ -1,5 +1,7 @@
 import graphene
 from c3po.models import C3POQuote
+from c3po.chatbot import wernicke
+
 
 class Query(object):
     '''
@@ -52,5 +54,16 @@ class CreateC3POQuote(graphene.relay.ClientIDMutation):
         return CreateC3POQuote(registry.quote)
 
 
+class AskC3PO(graphene.relay.ClientIDMutation):
+    response = graphene.String()
+    class Input:
+        question = graphene.String(required=True)
+    def mutate_and_get_payload(self, info, **_input):
+        question = _input.get('question', '')
+        response = wernicke.get_response(question)
+        return AskC3PO(str(response))
+
+
 class Mutation:
     create_c3po_quote = CreateC3POQuote.Field()
+    ask_c3po = AskC3PO.Field()

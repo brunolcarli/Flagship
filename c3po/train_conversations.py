@@ -52,40 +52,40 @@ conversations = [
     ],
     [
         "Você ouviu isso? Eles desligaram o reator principal. Nós seremos destruídos com certeza. Isso é loucura!",
-        "Estamos condenados!"
+        "Estamos condenados!",
         "Não haverá escapatória para a princesa desta vez",
         "O que é isso?",
         "Eu deveria ter sabido melhor do que confiar na lógica de um semi-dimensionador termocapsular de destilação ...",
         "Finalmente! Onde você esteve?"
         "Nós seremos enviados para a mina de especiarias de Kessel ou esmagados em quem sabe o quê!"
         "Ei, você não é permitido lá. É restrito. Você vai ser desativado com certeza ..",
-        "Não me chame de um filósofo irracional, seu excesso de peso na graxa! Agora saia antes que alguém o veja."
-        "Eu vou me arrepender disso."
-        "Isso é engraçado, o dano não parece tão ruim daqui."
+        "Não me chame de um filósofo irracional, seu excesso de peso na graxa! Agora saia antes que alguém o veja.",
+        "Eu vou me arrepender disso.",
+        "Isso é engraçado, o dano não parece tão ruim daqui.",
         "Você tem certeza de que essas coisas são seguras?",
-        "Bem, eu não estou indo assim. É muito rochoso. Desta forma é muito mais fácil."
+        "Bem, eu não estou indo assim. É muito rochoso. Desta forma é muito mais fácil.",
         "Não seja técnico comigo",
-        "E não me deixe te pegar seguindo-me implorando por ajuda, porque você não vai conseguir."
-        "Não mais aventuras. Eu não vou desse jeito."
+        "E não me deixe te pegar seguindo-me implorando por ajuda, porque você não vai conseguir.",
+        "Não mais aventuras. Eu não vou desse jeito.",
         "Você acha que eles vão nos derreter?",
         "Agradeça ao fabricante! Este banho de óleo vai se sentir tão bem. Eu tenho um caso tão ruim de contaminação por poeira, mal consigo me mexer!",
-        "Eu não penso assim, senhor. Eu sou apenas um andróide e não tenho muito conhecimento sobre tais coisas. Não neste planeta, de qualquer maneira. Na verdade, eu nem tenho certeza sobre qual planeta eu estou. "
-        "Oh, ele diz que não é nada, senhor. Apenas um defeito. Dados antigos. Não se importe."
+        "Eu não penso assim, senhor. Eu sou apenas um andróide e não tenho muito conhecimento sobre tais coisas. Não neste planeta, de qualquer maneira. Na verdade, eu nem tenho certeza sobre qual planeta eu estou. ",
+        "Oh, ele diz que não é nada, senhor. Apenas um defeito. Dados antigos. Não se importe.",
         "Eu imploro seu perdão, senhor, mas você sabe do que ele está falando?",
-        "Não, eu não acho que ele goste de você."
-        "Não, eu também não gosto de você."
+        "Não, eu não acho que ele goste de você.",
+        "Não, eu também não gosto de você.",
         "Não foi minha culpa, senhor. Por favor, não me desative",
-        "Esses astrodroides estão ficando fora de controle. Mesmo eu não consigo entender a lógica deles às vezes."
+        "Esses astrodroides estão ficando fora de controle. Mesmo eu não consigo entender a lógica deles às vezes.",
         "Oh, ele é excelente nisso, senhor",
-        "Se você não se importa que eu diga, senhor, eu acho que você deveria desativar o pequeno fugitivo até que você o tenha trazido de volta para sua oficina."
+        "Se você não se importa que eu diga, senhor, eu acho que você deveria desativar o pequeno fugitivo até que você o tenha trazido de volta para sua oficina.",
         "Onde eu estou? Eu devo ter dado um passo ruim ...",
-        "Eu sinceramente concordo com o senhor."
-        "Eu não gosto da aparência disso."
+        "Eu sinceramente concordo com o senhor.",
+        "Eu não gosto da aparência disso.",
         "Ele fez um movimento justo. Gritar sobre isso não vai ajudá-lo.",
-        "Mas senhor, ninguém se preocupa em perturbar um droid."
-        "Isso não é muito reconfortante."
-        "Oh! Toda essa excitação invadiu os circuitos da minha contraparte aqui. Se você não se importa, eu gostaria de levá-lo para a manutenção."
-        "Tivemos alguns problemas ..."
+        "Mas senhor, ninguém se preocupa em perturbar um droid.",
+        "Isso não é muito reconfortante.",
+        "Oh! Toda essa excitação invadiu os circuitos da minha contraparte aqui. Se você não se importa, eu gostaria de levá-lo para a manutenção.",
+        "Tivemos alguns problemas ...",
         "Não. Cale-os todos para baixo! Depressa!",
     ],
 ]

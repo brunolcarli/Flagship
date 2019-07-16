@@ -13,8 +13,9 @@ class Query(object):
         '''
         Retorna todos os quotes do C3PO
         '''
-        quotes = C3POQuote.objects.all()
-        return [quote.quote for quote in quotes]
+        return ['LISA SHIELD BLOCKING HACKER CONNECTION. xoxo :*']
+        # quotes = C3POQuote.objects.all()
+        # return [quote.quote for quote in quotes]
 
     c3po_not_sure = graphene.List(
         graphene.String
@@ -23,8 +24,9 @@ class Query(object):
         '''
         Retorna os quotes para péssima idéias.
         '''
-        quotes = quotes = C3POQuote.objects.all()
-        return [quote.quote for quote in quotes if quote.is_not_sure]
+        return ['LISA SHIELD BLOCKING HACKER CONNECTION. xoxo :*']
+        # quotes = quotes = C3POQuote.objects.all()
+        # return [quote.quote for quote in quotes if quote.is_not_sure]
 
 
 class CreateC3POQuote(graphene.relay.ClientIDMutation):
@@ -65,5 +67,6 @@ class AskC3PO(graphene.relay.ClientIDMutation):
 
 
 class Mutation:
-    create_c3po_quote = CreateC3POQuote.Field()
-    ask_c3po = AskC3PO.Field()
+    pass
+    # create_c3po_quote = CreateC3POQuote.Field()
+    # ask_c3po = AskC3PO.Field()

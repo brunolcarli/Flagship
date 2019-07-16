@@ -13,9 +13,9 @@ class Query(object):
         '''
         Retorna todos os quotes do C3PO
         '''
-        return ['4c49534120534849454c4420424c4f434b494e47204841434b455220434f4e4e454354494f4e2e20786f786f203a2a']
-        # quotes = C3POQuote.objects.all()
-        # return [quote.quote for quote in quotes]
+        # return ['4c49534120534849454c4420424c4f434b494e47204841434b455220434f4e4e454354494f4e2e20786f786f203a2a']
+        quotes = C3POQuote.objects.all()
+        return [quote.quote for quote in quotes]
 
     c3po_not_sure = graphene.List(
         graphene.String
@@ -24,9 +24,9 @@ class Query(object):
         '''
         Retorna os quotes para péssima idéias.
         '''
-        return ['4c49534120534849454c4420424c4f434b494e47204841434b455220434f4e4e454354494f4e2e20786f786f203a2a']
-        # quotes = quotes = C3POQuote.objects.all()
-        # return [quote.quote for quote in quotes if quote.is_not_sure]
+        # return ['4c49534120534849454c4420424c4f434b494e47204841434b455220434f4e4e454354494f4e2e20786f786f203a2a']
+        quotes = quotes = C3POQuote.objects.all()
+        return [quote.quote for quote in quotes if quote.is_not_sure]
 
 
 class CreateC3POQuote(graphene.relay.ClientIDMutation):
@@ -67,6 +67,5 @@ class AskC3PO(graphene.relay.ClientIDMutation):
 
 
 class Mutation:
-    pass
-    # create_c3po_quote = CreateC3POQuote.Field()
-    # ask_c3po = AskC3PO.Field()
+    create_c3po_quote = CreateC3POQuote.Field()
+    ask_c3po = AskC3PO.Field()

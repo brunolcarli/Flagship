@@ -13,7 +13,7 @@ class Query(object):
         '''
         Retorna todos os quotes do C3PO
         '''
-        return ['LISA SHIELD BLOCKING HACKER CONNECTION. xoxo :*']
+        return ['4c49534120534849454c4420424c4f434b494e47204841434b455220434f4e4e454354494f4e2e20786f786f203a2a']
         # quotes = C3POQuote.objects.all()
         # return [quote.quote for quote in quotes]
 
@@ -24,7 +24,7 @@ class Query(object):
         '''
         Retorna os quotes para péssima idéias.
         '''
-        return ['LISA SHIELD BLOCKING HACKER CONNECTION. xoxo :*']
+        return ['4c49534120534849454c4420424c4f434b494e47204841434b455220434f4e4e454354494f4e2e20786f786f203a2a']
         # quotes = quotes = C3POQuote.objects.all()
         # return [quote.quote for quote in quotes if quote.is_not_sure]
 

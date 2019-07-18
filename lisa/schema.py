@@ -4,6 +4,7 @@ import bot.schema as bot
 import abp.schema as abp
 import r2d2.schema as r2d2
 import c3po.schema as c3po
+import gomez.schema as gomez
 
 queries = (
     graphene.ObjectType,
@@ -11,6 +12,7 @@ queries = (
     abp.Query,
     r2d2.Query,
     c3po.Query,
+    gomez.Query
 )
 
 mutations = (

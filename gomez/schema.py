@@ -1,6 +1,6 @@
 import graphene
 from gomez.models import GomezQuote
-# from gomez.chatbot import wernicke
+from gomez.chatbot import wernicke
 
 
 class Query(object):
@@ -40,5 +40,17 @@ class CreateGomezQuote(graphene.relay.ClientIDMutation):
         return CreateGomezQuote(registry.quote)
 
 
+class AskGomez(graphene.relay.ClientIDMutation):
+    response = graphene.String()
+    class Input:
+        question = graphene.String(required=True)
+
+    def mutate_and_get_payload(self, info, **_input):
+        question = _input.get('question', '')
+        response = wernicke.get_response(question)
+        return AskGomez(str(response))
+
+
 class Mutation:
     create_gomez_quote = CreateGomezQuote.Field()
+    ask_gomez = AskGomez.Field()

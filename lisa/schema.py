@@ -21,6 +21,7 @@ mutations = (
     abp.Mutation,
     r2d2.Mutation,
     c3po.Mutation,
+    gomez.Mutation
 )
 
 class Query(*queries):

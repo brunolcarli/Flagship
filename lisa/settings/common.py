@@ -39,10 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'graphene_django',
+    'gunicorn',
     'bot',
     'abp',
     'r2d2',
-    'gunicorn',
+    'gomez',
 ]
 
 MIDDLEWARE = [

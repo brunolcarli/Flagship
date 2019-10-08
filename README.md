@@ -1,6 +1,6 @@
 <table align="center"><tr><td align="center" width="9999">
 
-<img src="https://i.gifer.com/M0vq.gif" align="center" width="300" alt="Project icon">
+<img src="https://i.gifer.com/Eu2f.gif" align="center" width="300" alt="Project icon">
 
 # Star Destroyer API
 

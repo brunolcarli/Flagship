@@ -3,7 +3,7 @@ from bot.models import Quote
 
 class Query(object):
     '''
-    Queries da Lisa.
+    Queries da server.
     '''
     check = graphene.String()
     def resolve_check(self, info, **kwargs):

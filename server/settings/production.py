@@ -1,6 +1,6 @@
 import os
 from decouple import config
-from lisa.settings.common import *
+from server.settings.common import *
 import dotenv
 
 DATABASES = {

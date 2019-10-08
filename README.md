@@ -1,18 +1,16 @@
 <table align="center"><tr><td align="center" width="9999">
 
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXVWPcOcRBM-8yqNcQbD82XlSC9lne4sKAWm0Y96EzjPNXOCR4g" align="center" width="150" alt="Project icon">
+<img src="https://i.gifer.com/M0vq.gif" align="center" width="300" alt="Project icon">
 
-# Lisa API
+# Star Destroyer API
 
-[![Generic badge](https://img.shields.io/badge/docs-blue.svg)](https://github.com/brunolcarli/Lisa/wiki)
+[![Generic badge](https://img.shields.io/badge/docs-blue.svg)](https://github.com/brunolcarli/star-destroyer/wiki)
 
-API pessoal
+Bots backend API server
 
 </td></tr></table>
 
-[Lisa](https://en.wikipedia.org/wiki/Lisa_Simpson) (homenagem à fantástica personagem de Matt Groening) é uma API de propósito geral.
-
-Atualmente serve como backend para Bots que ~~ainda~~ estão em desenvolvimento.
+[Star Destroyer](https://en.wikipedia.org/wiki/Star_Destroyer) (homenagem às fantásticas espaçonaves de Star Wars) é uma API que ostenta o backend para bots em execução, realizando procedimentos para armazenamento de informações enviadas pelos bots.
 
 # Rodando
 
@@ -43,17 +41,11 @@ Os server local estará rodando em: `localhost:8000/graphql/`
 
 
 <table align="center"><tr><td align="center" width="9999">
- 
-```
-                    ##        .            
-              ## ## ##       ==            
-           ## ## ## ##      ===            
-       /""""""""""""""""\___/ ===        
-  ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~   
-       \______ o          __/            
-         \    \        __/             
-          \____\______/                
-```
+
+<img src="https://maraaverick.rbind.io/banners/nyan_docker_whale_gfycat.gif" align="center" width="200" alt="Project icon">
+
+
+
 
 # Sorry
 

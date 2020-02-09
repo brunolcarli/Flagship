@@ -1,6 +1,6 @@
 import os
 from decouple import config
-from lisa.settings.common import *
+from star_destroyer.settings.common import *
 import dotenv
 
 DATABASES = {

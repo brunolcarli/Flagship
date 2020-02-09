@@ -2,15 +2,15 @@
 
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWXVWPcOcRBM-8yqNcQbD82XlSC9lne4sKAWm0Y96EzjPNXOCR4g" align="center" width="150" alt="Project icon">
 
-# Lisa API
+# star_destroyer API
 
-[![Generic badge](https://img.shields.io/badge/docs-blue.svg)](https://github.com/brunolcarli/Lisa/wiki)
+[![Generic badge](https://img.shields.io/badge/docs-blue.svg)](https://github.com/brunolcarli/star_destroyer/wiki)
 
 API pessoal
 
 </td></tr></table>
 
-[Lisa](https://en.wikipedia.org/wiki/Lisa_Simpson) (homenagem à fantástica personagem de Matt Groening) é uma API de propósito geral.
+[star_destroyer](https://en.wikipedia.org/wiki/star_destroyer_Simpson) (homenagem à fantástica personagem de Matt Groening) é uma API de propósito geral.
 
 Atualmente serve como backend para Bots que ~~ainda~~ estão em desenvolvimento.
 

@@ -1,1 +1,1 @@
-web: gunicorn lisa.wsgi --log-file -
+web: gunicorn star_destroyer.wsgi --log-file -

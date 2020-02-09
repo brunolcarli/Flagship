@@ -9,10 +9,12 @@ class Query(object):
     def resolve_check(self, info, **kwargs):
         return 'hello daddy'
 
-    bot_quotes = graphene.List(graphene.String)
+    bot_quotes = graphene.List(
+        graphene.String,
+        server_in=
+    )
     def resolve_bot_quotes(self, info, **kwargs):
-        quotes = Quote.objects.all()
-        return [quote.quote for quote in quotes]
+        return Quote.objects.filter(**kwargs)
 
 class BotCreateQuote(graphene.relay.ClientIDMutation):
     '''

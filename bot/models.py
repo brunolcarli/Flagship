@@ -2,4 +2,5 @@ from django.db import models
 
 
 class Quote(models.Model):
-    quote = models.CharField(max_length=666, null=False, blank=False)
+    quote = models.TextField(null=False, blank=False)
+    server = models.CharField(max_length=100, null=True, blank=True)

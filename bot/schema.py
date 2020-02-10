@@ -9,9 +9,12 @@ class Query(object):
     def resolve_check(self, info, **kwargs):
         return 'hello daddy'
 
-    bot_quotes = graphene.List(graphene.String)
+    bot_quotes = graphene.List(
+        graphene.String,
+        server=graphene.String()
+    )
     def resolve_bot_quotes(self, info, **kwargs):
-        quotes = Quote.objects.all()
+        quotes = Quote.objects.filter(**kwargs)
         return [quote.quote for quote in quotes]
 
 class BotCreateQuote(graphene.relay.ClientIDMutation):
@@ -27,11 +30,13 @@ class BotCreateQuote(graphene.relay.ClientIDMutation):
             required=True,
             description='A quote to be forever remembered.'
         )
+        server = graphene.String(
+            required=False,
+            description='Server where this quote was sent from.'
+        )
 
     def mutate_and_get_payload(self, info, **_input):
-
-        quote = _input.get('quote')
-        registry = Quote.objects.create(quote=quote)
+        registry = Quote.objects.create(**_input)
         registry.save()
         return BotCreateQuote(registry.quote)
 

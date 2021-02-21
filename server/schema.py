@@ -1,9 +1,9 @@
 import graphene
 
-# import bot.schema as bot
+import bot.schema as bot
 import abp.schema as abp
-# import r2d2.schema as r2d2
-# import gomez.schema as gomez
+import r2d2.schema as r2d2
+import gomez.schema as gomez
 import maradona.schema as maradona
 
 queries = (

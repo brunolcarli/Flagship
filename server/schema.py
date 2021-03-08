@@ -22,6 +22,7 @@ mutations = (
     abp.Mutation,
     r2d2.Mutation,
     maradona.Mutation,
+    wumpus.Mutation
 )
 
 class Query(*queries):

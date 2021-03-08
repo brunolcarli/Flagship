@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'bot',
     'abp',
     'r2d2',
-    'gomez',
     'maradona',
+    'wumpus',
 ]
 
 MIDDLEWARE = [

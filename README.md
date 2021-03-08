@@ -2,15 +2,15 @@
 
 <img src="https://66.media.tumblr.com/7556f19775c2942163b0d8db58eb8628/tumblr_nx84dpF0aR1qj6sk2o3_500.gif" align="center" width="300" alt="Project icon">
 
-# Star Destroyer API
+# Flagship API
 
 [![Generic badge](https://img.shields.io/badge/docs-blue.svg)](https://github.com/brunolcarli/star-destroyer/wiki)
 
-Bots backend API server
+Flagship API server
 
 </td></tr></table>
 
-[Star Destroyer](https://en.wikipedia.org/wiki/Star_Destroyer) (homenagem às fantásticas espaçonaves de Star Wars) é uma API que ostenta o backend para bots em execução, realizando procedimentos para armazenamento de informações enviadas pelos bots.
+[Flagship](https://starwars.fandom.com/wiki/Flagship) (homenagem às fantásticas espaçonaves de Star Wars) é uma API que ostenta o backend para bots em execução, realizando procedimentos para armazenamento de informações enviadas pelos bots.
 
 # Rodando
 
